@@ -22,6 +22,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="icon" type="image/png" href="{{asset ("/img/logo.jpg")}}">
 
 </head>
 
@@ -62,10 +63,17 @@
     <!-- Page Content -->
  	<div class="container">
 		<div class="row">
+            @if(Session::has('avisoSuccess'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                {{Session::get('avisoSuccess')}}
+            </div>
+            @endif
 			<div class="col-xs-12">
 				<h2>Registrar Usuarios</h2>
 				<hr>
-				<form action="#" method="">
+				<form action="{{url('/guardarUsuarios')}}" method="POST">
 				<input type="hidden" name="_token" value="{{csrf_token() }}">
 				<div class="form-group">
 					<label for="nombre">Nombre</label>

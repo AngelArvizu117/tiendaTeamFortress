@@ -19,3 +19,4 @@ Route::get('/home', function () {
 });
 
 Route::get('/registroUsuarios', 'usuariosController@registroUsuarios');
+Route::post('/guardarUsuarios','usuariosController@guardar');
