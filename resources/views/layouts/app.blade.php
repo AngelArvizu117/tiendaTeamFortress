@@ -12,7 +12,8 @@
 
     <!-- Styles -->
      <link href="{{asset ("css/bootstrap.min.css")}}" rel="stylesheet">
-
+    <!-- Custom CSS -->
+    <link href="{{asset ("css/shop-homepage.css")}}" rel="stylesheet">
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -22,7 +23,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-inverse navbar-static-top">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
 
@@ -78,7 +79,12 @@
 
         @yield('content')
     </div>
+  <!-- jQuery -->
+    <script src="{{asset("js/jquery.js")}}"></script>
+  
 
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{("js/bootstrap.min.js")}}"></script>
     <!-- Scripts -->
     <script src="/js/app.js"></script>
 </body>
