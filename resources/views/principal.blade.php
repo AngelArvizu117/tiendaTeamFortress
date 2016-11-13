@@ -8,9 +8,9 @@
             <div class="col-md-3">
                 <p class="lead">TEAM FORTRESS</p>
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Comida</a>
-                    <a href="#" class="list-group-item">Licores</a>
-                    <a href="#" class="list-group-item">Armas</a>
+                    <a href="agregar" class="list-group-item">Agregar</a>
+                    <a href="modificar" class="list-group-item">Modificar</a>
+                    <a href="buscar" class="list-group-item">Buscar</a>
                 </div>
             </div>
 

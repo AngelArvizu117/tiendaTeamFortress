@@ -14,9 +14,24 @@
 Route::get('/', function () {
     return view('principal');
 });
-Route::get('/home', function () {
+Route::get('home', function () {
     return view('principal');
 });
+
+
+Route::get('agregar', function(){
+	return view('productoNuevo');
+});
+
+Route::get('modificar', function(){
+	return view('productoModificar');
+});
+
+Route::get('buscar',function(){
+    return view('productoBuscar');
+});
+
+
 
 Route::get('/registroUsuarios', 'usuariosController@registroUsuarios');
 Route::post('/guardarUsuarios','usuariosController@guardar');
