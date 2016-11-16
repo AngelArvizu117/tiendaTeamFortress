@@ -1,12 +1,10 @@
 @extends('layouts.app')
-
 @section('content')
  <div class="container">
 
         <div class="row">
 
             <div class="col-md-3">
-<<<<<<< HEAD
                 <p class="lead">Team Fortress</p>
                 <div class="list-group"> 
 
@@ -16,15 +14,8 @@
                 </li>
                 @endforeach
 
-=======
-                <p class="lead">TEAM FORTRESS</p>
-                <div class="list-group">
-                    <a href="agregar" class="list-group-item">Agregar</a>
-                    <a href="modificar" class="list-group-item">Modificar</a>
-                    <a href="buscar" class="list-group-item">Buscar</a>
->>>>>>> origin/master
-                </div>
             </div>
+        </div>
 
 <!--contenido de la pagina,mas valorados y carrusel-->
             <div class="col-md-9">
@@ -77,11 +68,10 @@
 
 
 
-                </div>
+                </div><!--carrousel-->
 
             </div>
 
         </div>
 
-    </div>
 @endsection

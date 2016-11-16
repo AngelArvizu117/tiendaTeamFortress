@@ -114,10 +114,10 @@
                 </div>
             </div>
         </nav>
-
+</div>
         @yield('content')
         
-    </div>
+    
 
     <div class="container">
 
