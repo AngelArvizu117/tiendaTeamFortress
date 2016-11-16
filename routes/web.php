@@ -11,14 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('principal');
-});
-Route::get('/home', function () {
-    return view('principal');
-});
+Route::get('/','productosController@mCategorias');
+Route::get('/home','productosController@mCategorias');
 
-Route::get('/registroUsuarios', 'usuariosController@registroUsuarios');
-Route::post('/guardarUsuarios','usuariosController@guardar');
+Route::get('/mProductosPorCategoria/{id}','productosController@mProductosPorCategoria');
+Route::get('/mProductoIndividual/{id}','productosController@mProductoIndividual');
+
+Route::get('/administrador','adminController@mAdmin');
+Route::get('/mComentarios','adminController@mComentarios');
+Route::get('/eliminarComentario/{id}','adminController@eliminarComentario');
+
+
+
 Auth::routes();
 
