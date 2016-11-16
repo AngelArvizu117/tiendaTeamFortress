@@ -6,6 +6,7 @@
         <div class="row">
 
             <div class="col-md-3">
+<<<<<<< HEAD
                 <p class="lead">Team Fortress</p>
                 <div class="list-group"> 
 
@@ -15,6 +16,13 @@
                 </li>
                 @endforeach
 
+=======
+                <p class="lead">TEAM FORTRESS</p>
+                <div class="list-group">
+                    <a href="agregar" class="list-group-item">Agregar</a>
+                    <a href="modificar" class="list-group-item">Modificar</a>
+                    <a href="buscar" class="list-group-item">Buscar</a>
+>>>>>>> origin/master
                 </div>
             </div>
 
