@@ -19,7 +19,9 @@ Route::get('/mProductoIndividual/{id}','productosController@mProductoIndividual'
 
 Route::get('/administrador','adminController@mAdmin');
 Route::get('/mComentarios','adminController@mComentarios');
+Route::get('/mCategorias', 'adminController@mCategorias');
 Route::get('/eliminarComentario/{id}','adminController@eliminarComentario');
+Route::get('/eliminarCategoria/{id_c}','adminController@eliminarCategoria');
 
 Auth::routes();
 
