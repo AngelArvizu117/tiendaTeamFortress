@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2016 a las 03:24:03
--- Versión del servidor: 10.1.13-MariaDB
--- Versión de PHP: 5.6.21
+-- Tiempo de generación: 22-11-2016 a las 09:20:04
+-- Versión del servidor: 10.1.16-MariaDB
+-- Versión de PHP: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -27,19 +27,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categorias` (
-  `id_c` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELACIONES PARA LA TABLA `categorias`:
---
 
 --
 -- Volcado de datos para la tabla `categorias`
 --
 
-INSERT INTO `categorias` (`id_c`, `nombre`) VALUES
+INSERT INTO `categorias` (`id`, `nombre`) VALUES
 (1, 'armas principales'),
 (2, 'armas secundarias');
 
@@ -58,14 +54,6 @@ CREATE TABLE `comentarios` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELACIONES PARA LA TABLA `comentarios`:
---   `id_producto`
---       `productos` -> `id_p`
---   `id_user`
---       `users` -> `id`
---
 
 --
 -- Volcado de datos para la tabla `comentarios`
@@ -90,12 +78,6 @@ CREATE TABLE `compras` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- RELACIONES PARA LA TABLA `compras`:
---   `id_user`
---       `users` -> `id`
---
-
 -- --------------------------------------------------------
 
 --
@@ -112,14 +94,6 @@ CREATE TABLE `compras_productos` (
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- RELACIONES PARA LA TABLA `compras_productos`:
---   `id_compra`
---       `compras` -> `id_com`
---   `id_producto`
---       `productos` -> `id_p`
---
-
 -- --------------------------------------------------------
 
 --
@@ -131,10 +105,6 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- RELACIONES PARA LA TABLA `migrations`:
---
 
 --
 -- Volcado de datos para la tabla `migrations`
@@ -156,10 +126,6 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELACIONES PARA LA TABLA `password_resets`:
---
-
 -- --------------------------------------------------------
 
 --
@@ -177,10 +143,6 @@ CREATE TABLE `productos` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELACIONES PARA LA TABLA `productos`:
---
 
 --
 -- Volcado de datos para la tabla `productos`
@@ -202,14 +164,6 @@ CREATE TABLE `productos_categorias` (
   `id_producto` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELACIONES PARA LA TABLA `productos_categorias`:
---   `id_categoria`
---       `categorias` -> `id_c`
---   `id_producto`
---       `productos` -> `id_p`
---
 
 --
 -- Volcado de datos para la tabla `productos_categorias`
@@ -241,10 +195,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- RELACIONES PARA LA TABLA `users`:
---
-
---
 -- Volcado de datos para la tabla `users`
 --
 
@@ -266,7 +216,7 @@ INSERT INTO `users` (`id`, `name`, `age`, `address`, `phone`, `email`, `password
 -- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  ADD PRIMARY KEY (`id_c`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `comentarios`
@@ -326,7 +276,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_c` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `comentarios`
 --

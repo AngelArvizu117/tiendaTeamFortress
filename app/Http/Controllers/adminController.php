@@ -32,22 +32,21 @@ class adminController extends Controller
 
     public function mCategorias(){
       $categorias=DB::table('categorias as ca')
-      ->select ('ca.id_c','ca.nombre')
+      ->select ('ca.id','ca.nombre')
       ->get();
       return view('/mCategorias', compact('categorias'));
     }
 
-      public function eliminarCategoria($id_c){
-      categoria::find($id_c)->delete();
+      public function eliminarCategoria($id){
+      categoria::find($id)->delete();
       return Redirect('/mCategorias');
     }
-      public function AgregarCategoria($id_c){
-      return Redirect('/mCategorias');
+    
+    public function modificacategoria($id){
+     $categorias = categoria::find($id);
+      return view('mModificaCategorias',compact('categorias'));
     }
 
-    public function ModificarCategoria($id_c){
-      return Redirect('/mCategorias');
-    }
 
      
 }
