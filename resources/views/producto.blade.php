@@ -3,11 +3,11 @@
 @section('content') 
 <div class="container">
 
-        <div class="row">
+    <div class="row">
 
-            <div class="col-md-3">
+        <div class="col-md-3">
                 <p class="lead">Team Fortress</p>
-                <div class="list-group"> 
+            <div class="list-group"> 
 
                  @foreach($cat as $c)
                 <li>
@@ -15,9 +15,8 @@
                 </li>
                 @endforeach
 
-                </div>
-
             </div>
+        </div>
 
                 @foreach($producto as $p)
                     <div class="row">
@@ -29,23 +28,13 @@
                                 <h4><a href="{{url('/mProductoIndividual')}}/{{$p->id_p}}">{{$p->nombre}}</a>
                                 </h4>
                                 <p>{{$p->descripcion}}</p>
-                            </div>
-
-                            <div class="ratings">
                                 <p class="pull-right">Stock {{$p->cantidad}}</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                </p>
                             </div>
                         </div>
                         <a class="btn btn-warning" href="{{url('/addCar')}}/{{$p->id_p}}">Agregar al carrito <span class="glyphicon glyphicon-shopping-cart"></span></a>
                     </div>
                 </div>
-            @endforeach
+         @endforeach
 
                     <!--Seccion de comentarios y agregar al carrito-->
                       
@@ -55,12 +44,19 @@
                             <hr>
 
                         @forelse($comenta as $c)
-                            <p>{{$c->name}} <span class="glyphicon glyphicon-user"></span></p>
+
+                        <div class="ratings">
+                            <p>{{$c->name}} <span class="glyphicon glyphicon-user"></span> {{$c->created_at}}</p>
                             <p>{{$c->comentario}}</p>
-                           
+                            <p>
+                                <span class="glyphicon glyphicon-star"></span>x{{$c->estrellas}}
+                            </p>
+
+                        </div>
+
                             <hr>
 
-                             @empty
+                        @empty
 
                             <center>
                                 <p><h2>No se encontraron comentarios en este producto <span class="glyphicon glyphicon-remove-circle"></span></h2></p>
@@ -68,6 +64,51 @@
 
                         @endforelse
 
+                    </div>
+
+                    <div class="container">
+                        @if (!Auth::guest())
+                            <p><h4>Deja tu comentario y calificacion en este producto :)</h4></p>
+                                <br>
+                            <form action="{{url('/nComentario')}}" method="POST">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                             
+                                @foreach($producto as $p)
+                                <input class="form-control" name="id_producto" type="hidden" value="{{$p->id_p}}" required>
+                                @endforeach
+
+                                <input class="form-control" name="id_user" type="hidden" value="{{Auth::user()->id}}" required>
+
+                                <div class="form-group">
+                                    <input class="form-control" name="comentario" placeholder="Escribe tu comentario aqui..." type="text-area" size="245" required>
+                                </div>
+
+                               <!--Seccion de estrellas-->
+                                    <div class="stars">
+                                        <p>
+                                            <input class="star star-5" id="star-5" type="radio" value="5" name="star" required>
+                                            <label class="star star-5" for="star-5"></label>
+
+                                            <input class="star star-4" id="star-4" type="radio" value="4" name="star">
+                                            <label class="star star-4" for="star-4"></label>
+
+                                            <input class="star star-3" id="star-3" type="radio" value="3" name="star">
+                                            <label class="star star-3" for="star-3"></label>
+
+                                            <input class="star star-2" id="star-2" type="radio" value="2" name="star">
+                                            <label class="star star-2" for="star-2"></label>
+
+                                            <input class="star star-1" id="star-1" type="radio" value="1" name="star">
+                                            <label class="star star-1" for="star-1"></label>
+                                        </p>
+                                    </div>
+
+                                 <p>
+                                <input type="submit" value="Comentar" class="btn btn-warning">
+                                </p>
+
+                            </form>
+                        @endif
                     </div>
                 
                 </div>

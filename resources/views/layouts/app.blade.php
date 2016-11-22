@@ -9,12 +9,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
-    <title>Tienda Online</title>
+    <title>Tienda TeamFortress</title>
 
     <!-- Styles -->
      <link href="{{asset ("css/bootstrap.min.css")}}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{asset ("css/shop-homepage.css")}}" rel="stylesheet">
+    <link href="{{asset ("css/star.css")}}" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -52,7 +54,6 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-
                             <li><a href="{{ url('/login') }}">Login <span class="glyphicon glyphicon-log-in"></span></a></li>
                             <li><a href="{{ url('/register') }}">Registro <span class="glyphicon glyphicon-pencil"></span></a></li>
                             <li><a href="{{ url('/carro') }}">Carrito <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
