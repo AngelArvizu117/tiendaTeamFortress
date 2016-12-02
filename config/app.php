@@ -165,6 +165,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+
         /*
          * Package Service Providers...
          */

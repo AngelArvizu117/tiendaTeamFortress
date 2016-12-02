@@ -31,7 +31,11 @@ body {
 }
 
 .thumbnail img {
+<<<<<<< HEAD
     max-height: 200px;
+=======
+    width: 50%;
+>>>>>>> f83e667b787f08b4a8654efb1cd15b05c646bb13
 }
 
 .ratings {

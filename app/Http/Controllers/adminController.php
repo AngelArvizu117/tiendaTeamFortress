@@ -18,8 +18,9 @@ class adminController extends Controller
 
     public function mComentarios(){
 
-      $comentarios=DB::table('comentarios as c')
-       ->join('productos as p','c.id_producto','=','p.id')
+  
+    	$comentarios=DB::table('comentarios as c')
+       ->join('productos as p','c.id_producto','=','p.id_p')
        ->join('users as u','c.id_user','=','u.id')
        ->select('c.id','u.name','p.nombre','c.comentario')
        ->get();
@@ -27,14 +28,16 @@ class adminController extends Controller
       return view('/mComentarios',compact('comentarios'));
     }
 
+
+
     public function eliminarComentario($id){
-      Comentario::find($id)->delete();
-      return Redirect('/mComentarios');
+    	Comentario::find($id)->delete();
+    	return Redirect('/mComentarios');
     }
 
     public function mCategorias(){
-      $categorias=DB::table('categorias as c')
-      ->select ('c.id','c.nombre_categoria')
+      $categorias=DB::table('categorias as ca')
+      ->select ('ca.id','ca.nombre')
       ->get();
       return view('/mCategorias', compact('categorias'));
     }
@@ -119,4 +122,12 @@ class adminController extends Controller
 
     }
 
+    
+    public function modificacategoria($id){
+     $categorias = categoria::find($id);
+      return view('mModificaCategorias',compact('categorias'));
+    }
+
+
+     
 }

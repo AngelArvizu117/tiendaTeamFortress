@@ -57,7 +57,6 @@
                         @if (Auth::guest())
                             <li><a href="{{ url('/login') }}">Login <span class="glyphicon glyphicon-log-in"></span></a></li>
                             <li><a href="{{ url('/register') }}">Registro <span class="glyphicon glyphicon-pencil"></span></a></li>
-                            <li><a href="{{ url('/carro') }}">Carrito <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                             <li><a href="{{ url('/carro') }}">Carrito<span class="badge">{{$carro->total()}}</span> <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                         @else
 
@@ -124,6 +123,7 @@
 
     <div class="container">
      @include('flash::message')
+
         <!-- Footer -->
         <footer>
             <div class="row well">
@@ -151,6 +151,7 @@
   <!-- jQuery -->
     <script src="{{ asset ("js/jquery.js")}}"></script>
     
+  
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset ("js/bootstrap.min.js")}}"></script>

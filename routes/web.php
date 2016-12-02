@@ -12,6 +12,12 @@
 */
 
 //generales
+
+
+Route::get('/mModificaCategorias/{id}','adminController@modificacategoria');
+
+
+
 Route::get('/','productosController@mCategorias');
 Route::get('/home','productosController@mCategorias');
 
@@ -48,3 +54,4 @@ Route::get('/carro','cartController@carro');
 Route::get('/addCar/{id}','cartController@addCar');
 
 Auth::routes();
+

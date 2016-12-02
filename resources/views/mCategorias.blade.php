@@ -16,23 +16,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                      
-                                        @foreach($categorias as $ca)
-                                            <tr>
-                                                <td>{{$ca->id}}</td>
-                                                <td>{{$ca->nombre_categoria}}</td>
-                                                 
-                                                <td><a href="{{url('/eliminarCategoria')}}/{{$ca->id}}" class="btn btn-danger btn-xs">Eliminar</a>
-                                                 <a href="{{url('/modificarCategoria')}}/{{$ca->id}}" class="btn btn-primary btn-xs">Modificar</a></td>
-                                            </tr>
-                                            @endforeach
-                                            
+                          
+                            @foreach($categorias as $ca)
+                            <tr>
+                                <td>{{$ca->id}}</td>
+                                <td>{{$ca->nombre_categoria}}</td>
+                                
+                                <td><a href="{{url('/eliminarCategoria')}}/{{$ca->id}}" class="btn btn-danger btn-xs">Eliminar</a>
+                                   <a href="{{url('/modificarCategoria')}}/{{$ca->id}}" class="btn btn-primary btn-xs">Modificar</a></td>
+                               </tr>
+                               @endforeach
 
-                        </tbody>
-                    </table>
-                </div>
+                               
 
-            </div>
-        </div>
-    </div>
-    @endsection
+                           </tbody>
+                       </table>
+                   </div>
+
+               </div>
+           </div>
+       </div>
+       @endsection

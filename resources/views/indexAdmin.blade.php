@@ -106,7 +106,10 @@
                     </li>
                     <li>
                         <a href="{{url('/inventario')}}"><i class="fa fa-fw fa-bar-chart-o"></i>Inventario</a>
+                    <li class="active">
+                        <a href="{{url('/administrador')}}"><i class="fa fa-fw fa-dashboard"></i> Panel de control</a>
                     </li>
+
                   
                 </ul>
             </div>
@@ -204,6 +207,7 @@
                                 </div>
                             </div>
                             <a href="{{url('/mPedidos')}}">
+
                                 <div class="panel-footer">
                                     <span class="pull-right"><i class="fa fa-arrow-circle-right">Ir</i></span>
                                     <div class="clearfix"></div>

@@ -1,4 +1,5 @@
 @extends('indexAdmin')
+
 @section('content')
 <div class="col-sm-10 col-sm-offset-1 section">
 	<div class="row form-default">
@@ -7,6 +8,7 @@
 
 			<form action="{{url('/guardarProducto')}}" method="POST">
                <input type="hidden" name="_token" value="{{csrf_token()}}">
+
 
 				<div class="detail">
 					<div class="row">
@@ -24,6 +26,7 @@
 								<label>Cantidad</label>
 								<input type="number" class="form-control input-sm required" name="cantidad" required>
 							</div>
+						
 							</div>
 
 						</div>
@@ -38,6 +41,7 @@
 								<label>Precio</label>
 								<input type="number" class="form-control input-sm required"
 								ng-model="portafolio.vc_url" name="precio" required>
+
 							</div>
 
 							<div class="form-group">
@@ -45,7 +49,7 @@
 								<div class="images">
 									<h5 ng-show="editar.imgShow">Seleccione la imagen del producto</h5>
 									<input type="file" class="form-control" name="imagen" required>
-								
+
 							</div>
 						</div>
 					</div>

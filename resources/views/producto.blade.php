@@ -27,17 +27,19 @@
                             <div class="caption">
                                 <h4 class="pull-right">MXN {{$p->precio}}</h4>
                                 <h4><a href="{{url('/mProductoIndividual')}}/{{$p->id}}">{{$p->nombre}}</a>
+
                                 </h4>
                                 <p>{{$p->descripcion}}</p>
                                 <p class="pull-right">Stock {{$p->cantidad}}</p>
                             </div>
                         </div>
+
                         <a class="btn btn-warning" href="{{url('/addCar')}}/{{$p->id}}">Agregar al carrito <span class="glyphicon glyphicon-shopping-cart"></span></a>
                     </div>
                 </div>
 
-
-                   <!--Seccion de comentarios y agregar al carrito-->
+                    <!--Seccion de comentarios y agregar al carrito-->
+                      
                     <div class="container">
 
                             <h2>Comentarios</h2>
@@ -120,6 +122,7 @@
             @endforelse
 
                 </div>
+
             </div>
 
 @endsection

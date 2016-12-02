@@ -14,8 +14,9 @@ class productosController extends Controller
 {
     public function mCategorias(){
         //muestra todas las categorias registradas
-    	$cat=Categoria::all();
-    	return view('/principal',compact('cat'));
+
+      $cat=Categoria::all();
+      return view('/principal',compact('cat'));
 
     }
 
@@ -26,11 +27,10 @@ class productosController extends Controller
 	   ->join('productos as p','pc.id_producto','=','p.id')
 	   ->join('categorias as c','pc.id_categoria','=','c.id')
        ->select('p.id','p.nombre','p.descripcion','p.precio','p.cantidad','p.imagen')
-       ->where('c.id','=',$id)
-       ->get();
-
+       ->where('c.id','=',$id)->get();
+  
        //muestra todas las categorias registradas
-        $cat=Categoria::all();
+        $cat = Categoria::all();
 
         $catName=DB::table('categorias as c')
         ->select('c.nombre_categoria')
@@ -38,6 +38,8 @@ class productosController extends Controller
         ->first();
 
     	return view('/categoria',compact('cat','productos','catName'));
+    
+    
     }
 
     public function mProductoIndividual($id){
@@ -57,8 +59,8 @@ class productosController extends Controller
        ->get();
 
        //muestra todas las categorias registradas
-    	 $cat=Categoria::all();
-    	return view('/producto',compact('comenta','cat','producto'));
+       $cat=Categoria::all();
+      return view('/producto',compact('comenta','cat','producto'));
 
     }
 
