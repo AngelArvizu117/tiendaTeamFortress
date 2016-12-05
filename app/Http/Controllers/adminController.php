@@ -20,7 +20,7 @@ class adminController extends Controller
 
   
     	$comentarios=DB::table('comentarios as c')
-       ->join('productos as p','c.id_producto','=','p.id_p')
+       ->join('productos as p','c.id_producto','=','p.id')
        ->join('users as u','c.id_user','=','u.id')
        ->select('c.id','u.name','p.nombre','c.comentario')
        ->get();
@@ -37,7 +37,7 @@ class adminController extends Controller
 
     public function mCategorias(){
       $categorias=DB::table('categorias as ca')
-      ->select ('ca.id','ca.nombre')
+      ->select ('ca.id','ca.nombre_categoria')
       ->get();
       return view('/mCategorias', compact('categorias'));
     }

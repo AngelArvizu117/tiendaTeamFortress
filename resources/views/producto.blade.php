@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content') 
 <div class="container">
 
@@ -34,7 +33,16 @@
                             </div>
                         </div>
 
-                        <a class="btn btn-warning" href="{{url('/addCar')}}/{{$p->id}}">Agregar al carrito <span class="glyphicon glyphicon-shopping-cart"></span></a>
+                        <!--verifica el que este logueado para poder agregar al carrito y que haya stock de producto-->
+                        @if(Auth::guest())
+                            <h4>Necesitas estar logueado para agregar al carrito</h4>
+                             @else
+                                 @if($p->cantidad==0)
+                                    <h4>No hay stock de este producto por el momento</h4>
+                                        @else
+                                    <a class="btn btn-warning" href="{{url('/addCar')}}/{{$p->id}}">Lo quiero<span class="glyphicon glyphicon-heart"></span></a>
+                                 @endif
+                         @endif
                     </div>
                 </div>
 

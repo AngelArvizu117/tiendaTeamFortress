@@ -16,12 +16,12 @@
     </div>
     <div class="col-md-9">
      <h2>Categoria: {{$catName->nombre_categoria}}</h2>
-     @forelse ($productos->chunk(4) as $products)
+     @forelse ($productos->chunk(3) as $products)
      <div class="row">
         @foreach($products as $p)
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
-                <img src="{{ asset("/img/$p->imagen")}}">
+                <img src="{{asset("/img/$p->imagen")}}">
                 <div class="caption">
                     <h4 class="pull-right">MXN {{$p->precio}}</h4>
                     <h4><a href="{{url('/mProductoIndividual')}}/{{$p->id}}">{{$p->nombre}}</a>

@@ -6,34 +6,126 @@ use Illuminate\Http\Request;
 use App\Producto;
 use DB;
 use App\Carro;
+use App\Mail\correos;
+use Illuminate\Support\Facades\Mail;
+
 class cartController extends Controller
 {
-	protected $carro;
-	function __construct(Carro $carro) {
-		$this->carro = $carro;
-	}
+
+    //no implementado
+    public function mArticulos(){
+        
+        $id_user = \Auth::user()->id;
+      $carrito = DB::select('SELECT * FROM carrito WHERE id_user='. $id_user .';');
+        $articulosCarrito=count($carrito);
+    }
 
     public function carro(){
-    	$ids = [];
-    	$carrito = $this->carro->get();
-    	foreach ($carrito as $value) {
-	    	$ids[]= $value['product'];
-    	}
-    	$productos = DB::table('productos')
-                    ->whereIn('id', $ids)->get();
-    	dd($carrito);
-    	return view('',compact('productos','carrito'));
+
+        $id_user = \Auth::user()->id;
+
+        $existe = DB::select('SELECT * FROM carrito WHERE id_user='. $id_user .';');
+        if(count($existe) <= 0)
+        {
+            return view('carroVacio');
+
+        }else{
+
+        $mostrarCarro=DB::table('carrito as c')
+        ->join('productos as p','c.id_producto','=','p.id')
+        ->join('users as u','c.id_user','=','u.id')
+        ->select('p.nombre','p.cantidad','p.precio','c.cantidadPedido','c.id_producto')
+        ->where('c.id_user',$id_user)
+        ->get();
+
     }
+        return view('carro',compact('mostrarCarro'));
+
+    }
+
     public function addCar($id){
-		$this->carro->add($id);
+
+       /* $catidadOld=DB::table('carrito as c')
+        ->select('c.cantidadPedido')
+        ->get();
+        DB::update('update carrito set cantidadPedido = '.$cantidaOld+1.' where id_producto = ' . $id);
+           */
+        $id_user = \Auth::user()->id;
+
+        $existe = DB::select('SELECT * FROM carrito WHERE id_producto='. $id .' AND id_user=' .$id_user.';');
+        if(count($existe) > 0)
+        {
+             flash()->overlay('Articulo ya agregado al carrito', 'Atención');
+
+        }else{
+
+        $nuevoArticulo= new Carro();
+        $nuevoArticulo->id_producto=$id;
+        $nuevoArticulo->id_user=$id_user;
+        $nuevoArticulo->save();
+
 		flash()->overlay('Articulo agregado al carrito', 'Atención');
+        }
+
 		return redirect()->back(); 	
     }
-    public function eliminarCar($id='')
-    {
-		$this->carro->delete($id);
- 		flash()->overlay('Articulo borrado al carrito', 'Atención');
+    public function eliminarCar($id){   
+
+		DB::table('carrito')->where('id_producto', '=', $id)->delete();
+ 		flash()->overlay('Articulo borrado del carrito', 'Atención');
 		return redirect()->back(); 	
    		
     }
+
+    public function caja(){
+
+        $id_user = \Auth::user()->id;
+
+        $existe = DB::select('SELECT * FROM carrito WHERE id_user='. $id_user .';');
+        if(count($existe) <= 0)
+        {
+            return view('carroVacio');
+
+        }else{
+
+        $mostrarCaja=DB::table('carrito as c')
+        ->join('productos as p','c.id_producto','=','p.id')
+        ->join('users as u','c.id_user','=','u.id')
+        ->select('p.nombre','p.cantidad','p.precio','c.cantidadPedido','c.id_producto')
+        ->where('c.id_user',$id_user)
+        ->get();
+
+    }
+        return view('caja',compact('mostrarCaja'));
+
+    }
+
+    public function actualizarCarro(Request $datos){
+
+      $id_p=$datos->input('id_producto');
+      $cantidad=$datos->input('cantidad_articulos');
+
+      $nuevaCantidad=DB::table('carrito')
+            ->where('id_producto', $id_p)
+            ->update(['cantidadPedido' => $cantidad]);
+
+            return redirect()->back();
+    }
+
+    public function hacerPedido(){
+
+        $id_user = \Auth::user()->id;
+        $mostrarCaja=DB::table('carrito as c')
+        ->join('productos as p','c.id_producto','=','p.id')
+        ->join('users as u','c.id_user','=','u.id')
+        ->select('p.nombre','p.cantidad','p.precio','c.cantidadPedido','c.id_producto')
+        ->where('c.id_user',$id_user)
+        ->get();
+
+        Mail::to(\Auth::user()->email)->send(new correos());
+        flash()->overlay('Se a enviado un correo a tu email con los datos de tu compra :)', 'Atención');
+        return redirect()->back();
+       
+    }
+
 }

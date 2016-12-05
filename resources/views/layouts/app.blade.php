@@ -1,4 +1,3 @@
-@inject('carro',App\Carro)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,61 +54,38 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
+                            <li><a href="{{ url('/carro') }}">Carrito<span class="badge"></span><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                             <li><a href="{{ url('/login') }}">Login <span class="glyphicon glyphicon-log-in"></span></a></li>
                             <li><a href="{{ url('/register') }}">Registro <span class="glyphicon glyphicon-pencil"></span></a></li>
-                            <li><a href="{{ url('/carro') }}">Carrito<span class="badge">{{$carro->total()}}</span> <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                         @else
 
                             @if(Auth::user()->admin==1)
                             <li><a href="{{ url('/administrador') }}">Administrador <span class="glyphicon glyphicon-cog"></span></a></li>
                                 
-                                <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{Auth::user()->name}} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    
-                                    <li>
-                                        <a href="{{ url('/logout') }}"
+                             <li><a href="{{ url('/carro') }}">Carrito<span class="badge"></span><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span>{{ Auth::user()->name }}</a></li>
+                            <li><a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout <span class="glyphicon glyphicon-log-out"></span>
                                         </a>
-
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
-                                    </li>
-
-
-                                </ul>
                             </li>
-                            <li><a href="{{ url('/carro') }}">Carrito <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                             <!--Si no es administrador-->
                             @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                  <span class="glyphicon glyphicon-user"></span> {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ url('/logout') }}"
+                            <li><a href="{{ url('/carro') }}">Carrito<span class="badge"></span><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span>{{ Auth::user()->name }}</a></li>
+                            <li><a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             Logout <span class="glyphicon glyphicon-log-out"></span>
                                         </a>
-
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
-                                    </li>
-
-
-                                </ul>
                             </li>
-                            <li><a href="{{ url('/carro') }}">Carrito <span class="glyphicon glyphicon-shopping-cart"></span></a></li>
                             @endif
                         @endif
                     </ul>
@@ -151,8 +127,6 @@
   <!-- jQuery -->
     <script src="{{ asset ("js/jquery.js")}}"></script>
     
-  
-
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset ("js/bootstrap.min.js")}}"></script>
     <!-- Scripts -->
