@@ -14,7 +14,8 @@
                                                 <tr><th>Dirreccion</th><td>{{ Auth::user()->address }}</td></tr>
                                     </table>
                                 </div>
-
+                                        <hr>
+                                        <br>
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover table-striped">
                                         <thead>
@@ -27,12 +28,17 @@
                                         </thead>
                                         <tbody>
 
+                                            @php
+                                            $sum = 0
+                                            @endphp
+
                                             @foreach($mostrarCaja as $m)
                                              <tr>
                                                 <td>{{$m->nombre}}</td>
                                                 <td>{{$m->cantidadPedido}}</td>
                                                 <td>MXN {{ number_format($m->precio,2)}}</td>
-                                                <td>MXN {{ number_format($m->precio*$m->cantidadPedido, 2)}}</td>
+                                                <td>MXN {{ number_format($m->subtotal, 2)}}</td>
+                                                <?php $sum += $m->subtotal; ?>
                                             </tr> 
                                             @endforeach
                                          
@@ -42,6 +48,7 @@
 
                             </div>
                         </div>
+                    <h2>Total de compra: MXN {{number_format($sum,2)}}</h2>
     </div>
         <center>
          <a href="{{url('/carro')}}" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a>

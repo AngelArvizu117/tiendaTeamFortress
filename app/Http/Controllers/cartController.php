@@ -25,21 +25,25 @@ class cartController extends Controller
         $id_user = \Auth::user()->id;
 
         $existe = DB::select('SELECT * FROM carrito WHERE id_user='. $id_user .';');
-        if(count($existe) <= 0)
-        {
+        if(count($existe) <= 0){
             return view('carroVacio');
-
         }else{
 
-        $mostrarCarro=DB::table('carrito as c')
+        /*$mostrarCarro=DB::table('carrito as c')
         ->join('productos as p','c.id_producto','=','p.id')
         ->join('users as u','c.id_user','=','u.id')
         ->select('p.nombre','p.cantidad','p.precio','c.cantidadPedido','c.id_producto')
         ->where('c.id_user',$id_user)
-        ->get();
+        ->get();*/
+
+        $productosCarrito = DB::select("select p.nombre, p.cantidad, p.precio, c.cantidadPedido,c.id_producto,(p.precio*c.cantidadPedido) as 'subtotal'
+                        from carrito c
+                        inner join users u on c.id_user = u.id
+                        inner join productos p on c.id_producto = p.id
+                        where c.id_user = " . $id_user);
 
     }
-        return view('carro',compact('mostrarCarro'));
+        return view('carro',compact('productosCarrito'));
 
     }
 
@@ -88,12 +92,11 @@ class cartController extends Controller
 
         }else{
 
-        $mostrarCaja=DB::table('carrito as c')
-        ->join('productos as p','c.id_producto','=','p.id')
-        ->join('users as u','c.id_user','=','u.id')
-        ->select('p.nombre','p.cantidad','p.precio','c.cantidadPedido','c.id_producto')
-        ->where('c.id_user',$id_user)
-        ->get();
+      $mostrarCaja = DB::select("select p.nombre, p.cantidad, p.precio, c.cantidadPedido,c.id_producto,(p.precio*c.cantidadPedido) as 'subtotal'
+                        from carrito c
+                        inner join users u on c.id_user = u.id
+                        inner join productos p on c.id_producto = p.id
+                        where c.id_user = " . $id_user);
 
     }
         return view('caja',compact('mostrarCaja'));
