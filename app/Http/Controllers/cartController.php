@@ -7,6 +7,9 @@ use App\Producto;
 use DB;
 use App\Carro;
 use App\Mail\correos;
+use App\Compra_Producto;
+use App\Compra;
+use App\Categoria;
 use Illuminate\Support\Facades\Mail;
 
 class cartController extends Controller
@@ -115,15 +118,39 @@ class cartController extends Controller
             return redirect()->back();
     }
 
-    public function hacerPedido(){
+    public function hacerPedido( Request $dato){
 
+        $totalCompra=$dato->input('total');
         $id_user = \Auth::user()->id;
-        $mostrarCaja=DB::table('carrito as c')
-        ->join('productos as p','c.id_producto','=','p.id')
-        ->join('users as u','c.id_user','=','u.id')
-        ->select('p.nombre','p.cantidad','p.precio','c.cantidadPedido','c.id_producto')
-        ->where('c.id_user',$id_user)
-        ->get();
+
+        //agregando la compra a la tabla compras
+        $compra=new Compra();
+        $compra->id_user=$id_user;
+        $compra->totalCompra=$totalCompra;
+        $compra->save();
+
+        $id_compra=DB::select("select id from compras where id_user=".$id_user." and totalCompra=".$totalCompra);
+
+        $mostrarCaja = DB::select("select c.id_producto,cp.id,c.cantidadPedido,(p.precio*c.cantidadPedido) as 'subtotal'
+                        from carrito c
+                        inner join users u on c.id_user = u.id
+                        inner join compras cp on c.id_user = cp.id_user
+                        inner join productos p on c.id_producto = p.id
+                        where c.id_user = " . $id_user);
+
+            /*$rows=(count($mostrarCaja));
+            dd($rows);*/
+               
+            //agregar los productos a la tabla compras-productos
+            foreach ($mostrarCaja as $m) {
+                
+                $nCompra_P = new Compra_Producto();
+                $nCompra_P->id_producto=$m->id_producto;
+                $nCompra_P->id_compra=$m->id;
+                $nCompra_P->cantidad=$m->cantidadPedido;
+                $nCompra_P->importe=$m->subtotal;
+                $nCompra_P->save();
+            }
 
         Mail::to(\Auth::user()->email)->send(new correos());
         flash()->overlay('Se a enviado un correo a tu email con los datos de tu compra :)', 'Atención');

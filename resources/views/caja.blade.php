@@ -52,6 +52,11 @@
     </div>
         <center>
          <a href="{{url('/carro')}}" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a>
-         <a href="{{url('/pedido')}}" class="btn btn-warning btn-lg">Hacer Pedido <span class="glyphicon glyphicon-heart"></span></a>
+        <!--Enviar el total de compra al controlador para almacenarlo en la tabla compras-->
+        <form action="{{url('/pedido')}}" method="post">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
+            <input class="form-control" type="hidden" name="total" value="{{$sum}}" required>
+         <button type="submit" class="btn btn-warning btn-lg">Hacer Pedido <span class="glyphicon glyphicon-heart"></span></a>
          </center>
+         </form>
 @endsection

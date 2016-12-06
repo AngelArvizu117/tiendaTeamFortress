@@ -55,7 +55,7 @@ Route::get('/addCar/{id}','cartController@addCar');
 Route::get('/eliminarCar/{id}','cartController@eliminarCar');
 Route::get('/caja','cartController@caja');
 Route::post('/actualizarCarro','cartController@actualizarCarro');
-Route::get('/pedido','cartController@hacerPedido');
+Route::post('/pedido','cartController@hacerPedido');
 
 Auth::routes();
 
