@@ -136,10 +136,7 @@ class cartController extends Controller
                         inner join users u on c.id_user = u.id
                         inner join compras cp on c.id_user = cp.id_user
                         inner join productos p on c.id_producto = p.id
-                        where c.id_user = " . $id_user);
-
-            /*$rows=(count($mostrarCaja));
-            dd($rows);*/
+                        where c.id_user = " . $id_user." and cp.totalCompra =".$totalCompra);
                
             //agregar los productos a la tabla compras-productos
             foreach ($mostrarCaja as $m) {
@@ -154,7 +151,10 @@ class cartController extends Controller
 
         Mail::to(\Auth::user()->email)->send(new correos());
         flash()->overlay('Se a enviado un correo a tu email con los datos de tu compra :)', 'Atención');
-        return redirect()->back();
+
+        Carro::where('id_user',$id_user)->delete();
+
+        return view('/carroVacio');
        
     }
 
