@@ -1,3 +1,21 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 07-12-2016 a las 17:40:23
+-- Versión del servidor: 10.1.13-MariaDB
+-- Versión de PHP: 5.6.21
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Base de datos: `tiendaonline`
 --
@@ -24,14 +42,6 @@ CREATE TABLE `carrito` (
 --       `users` -> `id`
 --
 
---
--- Volcado de datos para la tabla `carrito`
---
-
-INSERT INTO `carrito` (`id_producto`, `id_user`, `cantidadPedido`, `created_at`, `updated_at`) VALUES
-(2, 4, 4, '2016-12-05 12:08:25', '2016-12-05 16:57:36'),
-(21, 4, 2, '2016-12-05 12:14:23', '2016-12-05 18:08:48');
-
 -- --------------------------------------------------------
 
 --
@@ -54,8 +64,8 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id`, `nombre_categoria`, `created_at`, `updated_at`) VALUES
-(3, 'armas principales', '2016-11-22 04:14:44', '0000-00-00 00:00:00'),
-(4, 'armas de mano', '2016-11-22 04:14:44', '0000-00-00 00:00:00');
+(3, 'armas main', '2016-12-07 07:44:34', '2016-12-07 13:44:34'),
+(4, 'armas second', '2016-12-07 07:44:27', '2016-12-07 13:44:27');
 
 -- --------------------------------------------------------
 
@@ -86,7 +96,11 @@ CREATE TABLE `comentarios` (
 --
 
 INSERT INTO `comentarios` (`id`, `id_producto`, `id_user`, `comentario`, `estrellas`, `created_at`, `updated_at`) VALUES
-(1, 1, 4, 'hola a todos', 5, '2016-12-05 15:49:25', '2016-12-05 15:49:25');
+(1, 1, 4, 'hola a todos', 5, '2016-12-05 15:49:25', '2016-12-05 15:49:25'),
+(2, 20, 1, 'Hola', 4, '2016-12-07 14:49:33', '2016-12-07 14:49:33'),
+(3, 20, 1, 'perro', 5, '2016-12-07 14:50:38', '2016-12-07 14:50:38'),
+(4, 20, 1, 'gg', 5, '2016-12-07 15:01:27', '2016-12-07 15:01:27'),
+(5, 21, 1, 'no me gusto', 1, '2016-12-07 19:01:43', '2016-12-07 19:01:43');
 
 -- --------------------------------------------------------
 
@@ -96,8 +110,8 @@ INSERT INTO `comentarios` (`id`, `id_producto`, `id_user`, `comentario`, `estrel
 
 CREATE TABLE `compras` (
   `id` int(11) NOT NULL,
-  `fecha` date NOT NULL,
   `id_user` int(11) NOT NULL,
+  `totalCompra` varchar(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -107,6 +121,18 @@ CREATE TABLE `compras` (
 --   `id_user`
 --       `users` -> `id`
 --
+
+--
+-- Volcado de datos para la tabla `compras`
+--
+
+INSERT INTO `compras` (`id`, `id_user`, `totalCompra`, `created_at`, `updated_at`) VALUES
+(19, 4, '43', '2016-12-07 03:52:23', '2016-12-07 03:52:23'),
+(20, 4, '444', '2016-12-07 03:53:20', '2016-12-07 03:53:20'),
+(21, 4, '271', '2016-12-07 04:00:03', '2016-12-07 04:00:03'),
+(22, 6, '129', '2016-12-07 06:02:13', '2016-12-07 06:02:13'),
+(43, 1, '120', '2016-12-07 19:18:50', '2016-12-07 19:18:50'),
+(44, 1, '86', '2016-12-07 19:20:47', '2016-12-07 19:20:47');
 
 -- --------------------------------------------------------
 
@@ -119,7 +145,7 @@ CREATE TABLE `compras_productos` (
   `id_producto` int(11) NOT NULL,
   `id_compra` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `importe` float NOT NULL,
+  `importe` varchar(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -131,6 +157,20 @@ CREATE TABLE `compras_productos` (
 --   `id_producto`
 --       `productos` -> `id`
 --
+
+--
+-- Volcado de datos para la tabla `compras_productos`
+--
+
+INSERT INTO `compras_productos` (`id`, `id_producto`, `id_compra`, `cantidad`, `importe`, `created_at`, `updated_at`) VALUES
+(30, 20, 19, 1, '43', '2016-12-07 03:52:23', '2016-12-07 03:52:23'),
+(31, 21, 20, 2, '444', '2016-12-07 03:53:20', '2016-12-07 03:53:20'),
+(32, 12, 21, 3, '96', '2016-12-07 04:00:03', '2016-12-07 04:00:03'),
+(33, 17, 21, 2, '46', '2016-12-07 04:00:03', '2016-12-07 04:00:03'),
+(34, 20, 21, 3, '129', '2016-12-07 04:00:03', '2016-12-07 04:00:03'),
+(35, 20, 22, 3, '129', '2016-12-07 06:02:13', '2016-12-07 06:02:13'),
+(57, 3, 43, 3, '120', '2016-12-07 19:18:50', '2016-12-07 19:18:50'),
+(58, 20, 44, 2, '86', '2016-12-07 19:20:47', '2016-12-07 19:20:47');
 
 -- --------------------------------------------------------
 
@@ -211,7 +251,8 @@ INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `cantidad`, `i
 (18, 'Caja Negra', 'Es un Lanzacohetes negro y rectangular con bordes curvos teniendo dos bandas cerradoras cerca del final frontal', 34, 6, 'cajanegra.png', 3577, '2016-11-29 10:40:07', '2016-11-29 10:40:07'),
 (19, 'Pala', 'Es una pala plegable y portatil tambien conocidaa como un util de trinchera', 21, 3, 'pala.png', 2212, '2016-11-29 10:40:07', '2016-11-29 10:40:07'),
 (20, 'Lanza llamas', 'Es un tubo largo de metal que va conectado a un tanque de propano', 43, 3, 'lanzallamas.png', 7890, '2016-11-29 10:40:07', '2016-11-29 10:40:07'),
-(21, 'Bastón de Caramelo', 'Scout mientras tienes equipado el Bastón de Caramelo también dejará pack de Salud.', 222, 3, 'baston.png', 34423, '2016-12-05 09:44:07', '2016-11-29 11:44:15');
+(21, 'Bastón de Caramelo', 'Scout mientras tienes equipado el Bastón de Caramelo también dejará pack de Salud.', 222, 3, 'baston.png', 34423, '2016-12-05 09:44:07', '2016-11-29 11:44:15'),
+(22, 'Aeropistola ', 'Es una pistola con el símbolo de radioactividad impresa en su mango y un par de pequeñas alas amarillas abriéndose hacia atrás.', 45, 4, 'winger.png', 45333, '2016-12-07 19:24:34', '2016-12-07 19:24:34');
 
 -- --------------------------------------------------------
 
@@ -277,8 +318,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `age`, `address`, `phone`, `email`, `password`, `remember_token`, `admin`, `created_at`, `updated_at`) VALUES
-(1, 'joel', 0, '', '0', 'joel@hotmail.com', '$2y$10$Bo9XNgiYNwIcwW4pXfDAOuegxzYZMa23sC99aHRuAOy7iMUPhubPq', 'dKPvEEE15BwH8HcfieA0KReyqGf0XhuQKxoTOKwWo8KqU0cdep84SwcPamBH', 1, '2016-11-01 03:04:13', '2016-12-05 10:33:06'),
-(4, 'jose', 19, 'barrancos', '223123', 'jgamezperez@gmail.com', '$2y$10$rhaiH9jm/6e31NLtcfxfBOGvAKXGz.a3cCS044r8q1bdlLv0F5YNO', 'mTc5j1iyS0nAFuzmXZ19NuHXKc2RyqEdoL48q1hAccyIxe1fEIlxucFVI2FB', 0, '2016-11-15 03:57:29', '2016-12-05 15:41:25'),
+(1, 'joel', 0, '', '0', 'joel@hotmail.com', '$2y$10$Bo9XNgiYNwIcwW4pXfDAOuegxzYZMa23sC99aHRuAOy7iMUPhubPq', 'tM8LZWMz6S40xcMuLg8exxTL5eOt40D69UkWPS86tyrRsyMVq7PoRorLuZWC', 1, '2016-11-01 03:04:13', '2016-12-07 14:47:35'),
+(4, 'jose', 19, 'barrancos', '223123', 'jgamezperez@gmail.com', '$2y$10$rhaiH9jm/6e31NLtcfxfBOGvAKXGz.a3cCS044r8q1bdlLv0F5YNO', '9DPLZTk2UQ1m3QuJDGBDHoNTj39LeZI85KnKmZns4KrHkyR53BPDKqyKPuXe', 0, '2016-11-15 03:57:29', '2016-12-07 09:31:44'),
 (5, 'daniela', 20, 'josefa ortiz', '665577', 'daniela@gmail.com', '$2y$10$SkTFLaUKlblfhCuXkSPElegYIkjakg9ISgImBaULq6dkZA92p20ri', 'qeQO0D8iXpqJc93wptBbTjQRwhkm9d43JZ5tZQSsbWH2xNoGnqxHjM109Nes', 0, '2016-11-16 10:15:50', '2016-11-21 07:43:16'),
 (6, 'manuel', 23, 'barrancos', '23232', 'manu@gmail.com', '$2y$10$fbtuhH7DyCOSvUPumCBEIesPvLtgEZSNMhaXPl7jh39m2c6EzxSXu', 'LE0ygAngq0hwXDVLn1jT3w7oSeBWKAHQjzf27VFqmwJDlM3FwfQYBeRQVWRJ', 0, '2016-11-16 10:16:57', '2016-11-16 10:17:24'),
 (7, 'david', 12, 'barrancos', '2344', 'david@gmail.com', '$2y$10$moBM1dc6LMFXZalhLRo5y.Ra0rGPBiIb.eB3YOCX/nYJUrxPsbTM.', 'LayM7gpJ26gLs4F9h7aH3LoXLXek87iIhc2UoN6bNF8GRDvPbhLMfU63lcUa', 0, '2016-11-16 23:55:09', '2016-11-16 23:56:33'),
@@ -357,17 +398,17 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- AUTO_INCREMENT de la tabla `compras_productos`
 --
 ALTER TABLE `compras_productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
@@ -377,7 +418,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `productos_categorias`
 --
