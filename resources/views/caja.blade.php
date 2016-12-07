@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<meta http-equiv="refresh" content="3">
 <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">

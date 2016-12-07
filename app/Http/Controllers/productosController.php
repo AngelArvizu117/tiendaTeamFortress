@@ -14,9 +14,18 @@ class productosController extends Controller
 {
     public function mCategorias(){
         //muestra todas las categorias registradas
-
       $cat=Categoria::all();
-      return view('/principal',compact('cat'));
+
+      //mostrar los articulos mas valorados
+      $populares=DB::table('productos as p')
+      ->join('comentarios as c','p.id','=','c.id_producto')
+      ->select('p.id','p.nombre','p.imagen','p.precio','p.descripcion')
+      ->where('c.estrellas','>','3')
+      ->distinct()
+      ->get();
+
+
+      return view('/principal',compact('cat','populares'));
 
     }
 
@@ -27,7 +36,8 @@ class productosController extends Controller
 	   ->join('productos as p','pc.id_producto','=','p.id')
 	   ->join('categorias as c','pc.id_categoria','=','c.id')
        ->select('p.id','p.nombre','p.descripcion','p.precio','p.cantidad','p.imagen')
-       ->where('c.id','=',$id)->get();
+       ->where('c.id','=',$id)
+       ->get();
   
        //muestra todas las categorias registradas
         $cat = Categoria::all();

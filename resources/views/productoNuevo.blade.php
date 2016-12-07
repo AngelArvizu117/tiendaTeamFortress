@@ -24,7 +24,7 @@
 								<textarea class="form-control input-sm required" name="descripcion" maxlength="200" cols="20" rows="4" required></textarea>
 								<div class="form-group">
 								<label>Cantidad</label>
-								<input type="number" class="form-control input-sm required" name="cantidad" required>
+								<input type="number" min="1" class="form-control input-sm required" name="cantidad" required>
 							</div>
 						
 							</div>
@@ -34,12 +34,12 @@
 
 							<div class="form-group">
 								<label>Codigo</label>
-								<input type="number" class="form-control input-sm required" name="codigo" required>
+								<input type="number" min="1"class="form-control input-sm required" name="codigo" required>
 							</div>
 
 							<div class="form-group">
 								<label>Precio</label>
-								<input type="number" class="form-control input-sm required"
+								<input type="number" min="1" class="form-control input-sm required"
 								ng-model="portafolio.vc_url" name="precio" required>
 
 							</div>

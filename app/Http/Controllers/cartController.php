@@ -129,7 +129,7 @@ class cartController extends Controller
         $compra->totalCompra=$totalCompra;
         $compra->save();
 
-        $mostrarCaja = DB::select("select c.id_producto,cp.id,c.cantidadPedido,(p.precio*c.cantidadPedido) as 'subtotal'
+        $mostrarCaja = DB::select("select p.nombre,p.precio,c.id_producto,cp.id,c.cantidadPedido,(p.precio*c.cantidadPedido) as 'subtotal'
                         from carrito c
                         inner join users u on c.id_user = u.id
                         inner join compras cp on c.id_user = cp.id_user
@@ -147,12 +147,20 @@ class cartController extends Controller
                 $nCompra_P->save();
             }
 
+            //borrar elementos del carrito
+            Carro::where('id_user',$id_user)->delete();
+
+
         Mail::to(\Auth::user()->email)->send(new correos());
         flash()->overlay('Se a enviado un correo a tu email con los datos de tu compra :)', 'Atención');
 
-        Carro::where('id_user',$id_user)->delete();
+        //pdf ticket
+           $vista=view('ticket',compact('mostrarCaja'));
+           $dompdf=\App::make('dompdf.wrapper');
+           $dompdf->loadHTML($vista);
+           return $dompdf->stream('ticket.pdf');
 
-        return view('/carroVacio');
+        //return redirect()->back();
        
     }
 

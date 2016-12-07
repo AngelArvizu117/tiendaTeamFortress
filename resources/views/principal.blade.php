@@ -63,77 +63,25 @@
 
         </div>
 
+        <h2 class="text-center">Productos más populares</h2>
+        <hr>
 
         <!--Aqui van los productos mas valorados-->
         
         <div class="row">
-
+            @foreach($populares as $p)
            <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
-                <img src="">
-                <div class="caption">
-                    <h4 class="pull-right">MXN </h4>
-                    <h4><a href=""></a>
+                <img class="image-responsive" src="{{ asset("/img/$p->imagen")}}">          
+                    <h4 class="pull-right">MXN {{$p->precio}}</h4>
+                    <h4><a href="{{url('/mProductoIndividual')}}/{{$p->id}}">{{$p->nombre}}</a>
                     </h4>
-                    <p></p>
-                </div>
-                <div class="ratings">
-                    <p class="pull-right"></p>
-                    <p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                    </p>
-                </div>
+                <p>{{$p->descripcion}}</p>
             </div>          
         </div>
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-                <img src="">
-                <div class="caption">
-                    <h4 class="pull-right">MXN </h4>
-                    <h4><a href=""></a>
-                    </h4>
-                    <p></p>
-                </div>
-                <div class="ratings">
-                    <p class="pull-right"></p>
-                    <p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                    </p>
-                </div>
-            </div>          
-        </div>
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-                <img src="">
-                <div class="caption">
-                    <h4 class="pull-right">MXN </h4>
-                    <h4><a href=""></a>
-                    </h4>
-                    <p></p>
-                </div>
-                <div class="ratings">
-                    <p class="pull-right"></p>
-                    <p>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                    </p>
-                </div>
-            </div>          
-        </div>
-
+        @endforeach
     </div>
-    
+
 </div>
 
 </div>
