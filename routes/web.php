@@ -57,5 +57,8 @@ Route::get('/caja','cartController@caja');
 Route::post('/actualizarCarro','cartController@actualizarCarro');
 Route::post('/pedido','cartController@hacerPedido');
 
+//pedidos
+Route::get('/pedidos','userController@pedidosUsuario')->middleware('auth');
+
 Auth::routes();
 

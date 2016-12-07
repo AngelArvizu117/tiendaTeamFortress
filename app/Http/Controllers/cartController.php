@@ -129,8 +129,6 @@ class cartController extends Controller
         $compra->totalCompra=$totalCompra;
         $compra->save();
 
-        $id_compra=DB::select("select id from compras where id_user=".$id_user." and totalCompra=".$totalCompra);
-
         $mostrarCaja = DB::select("select c.id_producto,cp.id,c.cantidadPedido,(p.precio*c.cantidadPedido) as 'subtotal'
                         from carrito c
                         inner join users u on c.id_user = u.id

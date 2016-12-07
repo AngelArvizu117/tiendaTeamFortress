@@ -63,7 +63,7 @@
                             <li><a href="{{ url('/administrador') }}">Administrador <span class="glyphicon glyphicon-cog"></span></a></li>
                                 
                              <li><a href="{{ url('/carro') }}">Carrito<span class="badge"></span><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-user"></span>{{ Auth::user()->name }}</a></li>
+                            <li><a href="{{url('/pedidos')}}"><span class="glyphicon glyphicon-user"></span>{{ Auth::user()->name }}</a></li>
                             <li><a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -76,7 +76,7 @@
                             <!--Si no es administrador-->
                             @else
                             <li><a href="{{ url('/carro') }}">Carrito<span class="badge"></span><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-user"></span>{{ Auth::user()->name }}</a></li>
+                            <li><a href="{{url('/pedidos')}}"><span class="glyphicon glyphicon-user"></span>{{ Auth::user()->name }}</a></li>
                             <li><a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
