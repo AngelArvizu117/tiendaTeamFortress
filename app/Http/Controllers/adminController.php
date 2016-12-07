@@ -44,11 +44,41 @@ class adminController extends Controller
 
       public function eliminarCategoria($id){
       categoria::find($id)->delete();
-      return Redirect('/mCategorias');
+      //borrar en cascada los productos de la categoria seleccinada
+      Producto_Categoria::where('id_categoria',$id)->delete();
+      return Redirect('/mCategorias')->with('message','Se borro correctamente la categoria');;
     }
-      public function AgregarCategoria($id){
-      return Redirect('/mCategorias');
+      public function nCategoria(){
+      return view('/nCategoria');
     }
+
+      public function guardarCategoria(Request $datos){
+          
+          $nCategoria= new Categoria();
+          $nCategoria->nombre_categoria=$datos->input('categoria');
+          $nCategoria->save();
+          return redirect()->back()->with('message','Se registro correctamente la categoria');
+
+      }
+
+      public function mostrarActCategoria($id){
+        $categoria=DB::table('categorias as c')
+        ->select('c.id','c.nombre_categoria')
+        ->where('c.id','=',$id)
+        ->get();
+        return view('/actualizarCategoria',compact('categoria'));
+      }
+
+      public function actCategoria(Request $datos,$id){
+          
+          $nCategoria=Categoria::find($id);
+          $nCategoria->nombre_categoria=$datos->input('categoria');
+          $nCategoria->save();
+
+           $categorias=Categoria::all();
+           return view('/mCategorias',compact('categorias'))->with('message','Se actualizo correctamente la categoria');
+
+      }
 
     public function ModificarCategoria($id){
       return Redirect('/mCategorias');
@@ -122,10 +152,15 @@ class adminController extends Controller
 
     }
 
-    
-    public function modificacategoria($id){
-     $categorias = categoria::find($id);
-      return view('mModificaCategorias',compact('categorias'));
+    public function mPedidos(){
+        
+        $mostrarTodosPedidos = DB::select("select u.name,p.nombre, cp.cantidad,cp.importe
+                        from compras_productos cp
+                        inner join compras c on cp.id_compra=c.id
+                        inner join users u on c.id_user = u.id
+                        inner join productos p on cp.id_producto = p.id");
+
+      return view('/mPedidos',compact('mostrarTodosPedidos'));
     }
 
 

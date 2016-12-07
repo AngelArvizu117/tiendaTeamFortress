@@ -16,7 +16,8 @@
     <!-- Custom CSS -->
     <link href="{{asset ("css/shop-homepage.css")}}" rel="stylesheet">
     <link href="{{asset ("css/star.css")}}" rel="stylesheet">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{asset("//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css")}}">
+    <link rel="icon" type="image/png" href="{{asset ("/img/logo.png")}}">
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([

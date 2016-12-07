@@ -67,6 +67,7 @@
         <!--Aqui van los productos mas valorados-->
         
         <div class="row">
+
            <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
                 <img src="">
@@ -132,6 +133,7 @@
         </div>
 
     </div>
+    
 </div>
 
 </div>

@@ -36,7 +36,11 @@ Route::get('/mCategorias','adminController@mCategorias');
 Route::get('/eliminarCategoria/{id}','adminController@eliminarCategoria');
 Route::get('/mAsignarCategoriaProducto','adminController@mAsignarCategoriaProducto');
 Route::post('/asignarCategoria','adminController@asignarCategoria');
+Route::get('/nCategoria','adminController@nCategoria');
+Route::post('/guardarCategoria','adminController@guardarCategoria');
 
+Route::get('/mostrarActCategoria/{id}','adminController@mostrarActCategoria');
+Route::post('/actCategoria/{id}','adminController@actCategoria');
 
 //productos
 Route::get('/mProductos','adminController@mProductos');

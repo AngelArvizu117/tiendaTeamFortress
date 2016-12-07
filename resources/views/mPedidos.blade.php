@@ -3,32 +3,31 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Categorias <a href="{{url('/nCategoria')}}" class="btn btn-warning btn-md">Agregar categoria <span class="glyphicon glyphicon-plus"></span></a></h3>
+                <h3 class="panel-title">Todos los pedidos realiados</h3>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped">
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>Categoria</th>
-                                <th>Opciones</th>
+                                <th>Nombre</th>
+                                <th>Nombre producto</th>
+                                <th>Cantidad</th>
+                                <th>Importe</th>
                             </tr>
                         </thead>
                         <tbody>
                           
-                            @foreach($categorias as $ca)
+                            @foreach($mostrarTodosPedidos as $p)
                             <tr>
-                                <td>{{$ca->id}}</td>
-                                <td>{{$ca->nombre_categoria}}</td>
-                                
-                                <td><a href="{{url('/eliminarCategoria')}}/{{$ca->id}}" class="btn btn-danger btn-xs">Eliminar</a>
-                                   <a href="{{url('/mostrarActCategoria')}}/{{$ca->id}}" class="btn btn-primary btn-xs">Modificar</a></td>
+                                <td>{{$p->name}}</td>
+                                <td>{{$p->nombre}}</td>
+                                <td>{{$p->cantidad}}</td>
+                                <td>{{$p->importe}}</td>
                                </tr>
                                @endforeach
 
                                
-
                            </tbody>
                        </table>
                    </div>

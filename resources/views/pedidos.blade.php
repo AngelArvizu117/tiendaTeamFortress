@@ -26,23 +26,25 @@
                                         </thead>
                                         <tbody>
 
-                                            @foreach($mostrarPedidos as $m)
+                                            @forelse($mostrarPedidos as $m)
                                              <tr>
                                                 <td>{{$m->nombre}}</td>
                                                 <td>{{$m->cantidad}}</td>
                                                 <td>MXN {{ number_format($m->importe, 2)}}</td>
-            
                                             </tr> 
-                                            @endforeach
+                                            @empty
+                                            <h2 class="text-center">No hay compras registradas</h2>
+                                            @endforelse
                                          
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         </div>
     </div>
+
         <center>
          <a href="{{url('/home')}}" class="btn btn-warning btn-lg">Seguir comprando <span class="glyphicon glyphicon-heart"></span></a>
         </center>
+
 @endsection

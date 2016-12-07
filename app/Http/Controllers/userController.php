@@ -15,6 +15,7 @@ class userController extends Controller
 {
     public function pedidosUsuario(){
 
+    	//mostrar los articulos que compro cierto usuario
     	$id_user = \Auth::user()->id;
 
     	$mostrarPedidos = DB::select("select p.nombre, cp.cantidad,cp.importe
